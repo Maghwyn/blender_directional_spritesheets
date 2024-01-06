@@ -50,8 +50,8 @@ cargo run
 
 ## Spritesheets example
 
-![Running_E](https://github.com/Maghwyn/blender_directional_spritesheets/tree/main/examples/Running_E.png)
-![Running_S](https://github.com/Maghwyn/blender_directional_spritesheets/tree/main/examples/Running_S.png)
+![Running_E](examples/Running_E.png)
+![Running_S](examples/Running_S.png)
 
 ## License
 

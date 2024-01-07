@@ -22,6 +22,8 @@ You can also optionally change `RENDER_RESOLUTION_X`, `RENDER_RESOLUTION_Y` and 
 I wouldn't recommand changing `_ANGLES` unless your requirements does not fit neither 4,8,16 and 32 angles.
 I wouldn't recommand changing `_ANGLES_DIR` unless you find better directories name for your angles.
 
+TODO: Rework the script to be a all-in-one, lazy rn
+
 ## Blender version
 
 Each scripts were tested and working on MacOS Sonoma 14.0 with Blender 4.0.2

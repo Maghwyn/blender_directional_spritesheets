@@ -12,7 +12,7 @@ Instead the only thing you need to do is edit some properties, open the context 
 
 You will need to change the properties `mainFolder` and `outFolder` to your needs.
 
-Once you got a correct path for the `mainFolder` property, the list of animation folders will be updated reactively. From there you can include/exclude the folder, specify if the animation are looping and adjust the `framesPerSecond`.
+Once you got a correct path for the `mainFolder` property, the list of animation folders will be updated reactively. From there you can include/exclude a specific folder, specify if the animation are looping and adjust the `framesPerSecond`.
 
 Example of the script in the editor from the last gif update.
 ![Unity_Script_SS](../examples/Unity_Script_SS.png)

@@ -8,7 +8,7 @@ Instead the only thing you need to do is edit some properties, open the context 
 
 ## Running the script
 
-![Video_Example](examples/example_unity_script.png)
+![Video_Example](examples/example_unity_script.gif)
 
 You will need to change the properties `mainFolder` and `outFolder` to your needs.
 Might aswell change the `framesPerSecond` if it's too low.

@@ -8,12 +8,14 @@ Instead the only thing you need to do is edit some properties, open the context 
 
 ## Running the script
 
-![](https://github.com/Maghwyn/blender_directional_spritesheets/blob/main/examples/example_unity_script.gif)
+![](https://github.com/Maghwyn/blender_directional_spritesheets/blob/main/examples/Unity_Script_Use_Example.gif)
 
 You will need to change the properties `mainFolder` and `outFolder` to your needs.
-Might aswell change the `framesPerSecond` if it's too low.
 
-WIP: Working on a better approach to includes/excludes animations from the tracking.
+Once you got a correct path for the `mainFolder` property, the list of animation folders will be updated reactively. From there you can include/exclude the folder, specify if the animation are looping and adjust the `framesPerSecond`.
+
+Example of the script in the editor from the last gif update.
+![Unity_Script_SS](examples/Unity_Script_SS.png)
 
 ## Blender version
 

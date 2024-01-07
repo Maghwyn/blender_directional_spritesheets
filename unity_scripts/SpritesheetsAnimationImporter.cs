@@ -1,9 +1,24 @@
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using System.Collections.Generic;
 
 public class SpritesheetsAnimationImporter : MonoBehaviour
 {
+	#region SUBCLASS
+
+	[System.Serializable]
+	public class SpritesheetAnimation
+	{
+		public string name; //! Avoid changing this property in the editor
+		public string path; //! Avoid changing this property in the editor
+		public float framesPerSecond;
+		public bool loopTime;
+		public bool includeFolder;
+	}
+
+	#endregion
+
 	#region PROPERTIES
 
 	// Set your own parent folder if you don't use the Assets folder.
@@ -15,30 +30,34 @@ public class SpritesheetsAnimationImporter : MonoBehaviour
 	// Set your own path
 	public string outFolder = "Animations/Model";
 
-	// Change it to your needs
-	public float framesPerSecond = 12f;
+	[SerializeField]
+	private List<SpritesheetAnimation> spritesheetAnimationList = new List<SpritesheetAnimation>();
 
-	// TODO: I could potentially do that better per animations, but i would need a selector from the editor.. mh.
-	// TODO: Is there a way to dynamically generate the properties based on mainFolder changes ?
-	// Enable to make the animation play through and then restart when the end is reached.
-	public bool loopTime = true;
+	// Used as a comparator
+	private string prevMainFolder = "";
 
 	#endregion
 
-	#region METHODS
-
 #if (UNITY_EDITOR)
+
+	#region METHODS
 
 	[ContextMenu("CreateAnimations")]
 	void CreateAnimations()
 	{
-		string[] animationFolderPaths = System.IO.Directory.GetDirectories($"{parentFolder}/{mainFolder}");
+		if (spritesheetAnimationList.Count == 0) {
+			Debug.LogError($"Couldn't find the animation folders for path: {parentFolder}/{mainFolder}");
+			return;
+		}
 
-		foreach (string animationFolderPath in animationFolderPaths)
+		for (int x = 0; x < spritesheetAnimationList.Count; x++)
 		{
-			string animationFolderName = System.IO.Path.GetFileName(animationFolderPath);
+			SpritesheetAnimation spritesheetAnimation = spritesheetAnimationList[x];
+			if (spritesheetAnimation.includeFolder == false) continue;
+
+			string animationFolderName = System.IO.Path.GetFileName(spritesheetAnimation.path);
 			string animationDestinationPath = $"{outFolder}/{animationFolderName}";
-			string[] spritesheetGUIDs = AssetDatabase.FindAssets("t:Sprite", new[] { animationFolderPath });
+			string[] spritesheetGUIDs = AssetDatabase.FindAssets("t:Sprite", new[] { spritesheetAnimation.path });
 
 			CreateAnimationFolder(animationDestinationPath);
 
@@ -49,15 +68,26 @@ public class SpritesheetsAnimationImporter : MonoBehaviour
 				Object[] objects = AssetDatabase.LoadAllAssetsAtPath(path);
 				Sprite[] sprites = objects.OfType<Sprite>().ToArray(); // Filter out Texture2D at index 0
 
-				CreateAnimationClip(animationDestinationPath, animationName, sprites);
+				CreateAnimationClip(
+					animationDestinationPath,
+					animationName,
+					sprites,
+					spritesheetAnimation.framesPerSecond,
+					spritesheetAnimation.loopTime
+				);
 			}
 		}
 
 		Debug.Log("Animations created successfully!");
 	}
 
-	private void CreateAnimationClip(string animationDestinationPath, string clipName, Object[] sprites)
-	{
+	private void CreateAnimationClip(
+		string animationDestinationPath,
+		string clipName,
+		Object[] sprites,
+		float framesPerSecond,
+		bool loopTime
+	) {
 		AnimationClip clip = new AnimationClip();
 		clip.name = clipName;
 		clip.frameRate = framesPerSecond;
@@ -109,7 +139,48 @@ public class SpritesheetsAnimationImporter : MonoBehaviour
 		}
 	}
 
-#endif
+	private void UpdateAnimationsList()
+	{
+		string spritesheetFolderPath = $"{parentFolder}/{mainFolder}";
+
+		if (AssetDatabase.IsValidFolder(spritesheetFolderPath)) {
+			string[] animationFolderPaths = System.IO.Directory.GetDirectories(spritesheetFolderPath);
+
+			foreach (string animationFolderPath in animationFolderPaths)
+			{
+				SpritesheetAnimation animation = new SpritesheetAnimation
+				{
+					name = System.IO.Path.GetFileName(animationFolderPath),
+					path = animationFolderPath,
+					framesPerSecond = 12f,
+					loopTime = false,
+					includeFolder = true
+				};
+
+				spritesheetAnimationList.Add(animation);
+			}
+		}
+	}
 
 	#endregion
+
+	#region MONOBEHAVIOR
+
+	private void OnValidate()
+	{
+		if (prevMainFolder != mainFolder)
+		{
+			// Always clear the animation list whenever the animationFolderPath change
+			spritesheetAnimationList.Clear();
+			prevMainFolder = mainFolder;
+
+			if (mainFolder != "") {
+				UpdateAnimationsList();
+			}
+		}
+	}
+
+	#endregion
+
+#endif
 }

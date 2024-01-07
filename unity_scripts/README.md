@@ -3,8 +3,7 @@
 This script streamlines the process of creating animations from spritesheets in Unity.
 The primary goal is to save time and effort by automating the animation creation for a collection of spritesheets.
 
-So instead of dragging and dropping each animations to the scene, renaming them and changing their location for the .anim that was created yadayada.
-Instead the only thing you need to do is edit some properties, open the context menu and click on the function name, and voila.
+So instead of dragging and dropping each animations to the scene, renaming them and changing their location for the .anim that was created yadayada. With this script, the only thing you need to do is edit some properties, open the context menu and click on the function name, and voila.
 
 ## Running the script
 

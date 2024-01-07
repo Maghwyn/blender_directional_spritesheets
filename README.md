@@ -53,6 +53,8 @@ cargo run
 ![Running_E](examples/Running_E.png)
 ![Running_S](examples/Running_S.png)
 
+Model used : Mixamo Alien Solider
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/Maghwyn/blender_directional_spritesheets/blob/main/LICENSE) file for details.

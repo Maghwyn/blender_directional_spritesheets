@@ -14,8 +14,9 @@ ACTIONS_NAMES = ["Idle", "Running", "Dying"] #! Make sure to use the exact name 
 RENDER_RESOLUTION_X = 256
 RENDER_RESOLUTION_Y = 256
 RENDER_FRAME_FREQUENCY = 2
+ISOMETRIC = False
 #! Make sure it's either 4, 8, 16 or 32
-DESIRED_NUM_ANGLES = 4 
+DESIRED_NUM_ANGLES = 4
 
 # If you need to edit the clock direction or move N to be angle 0, feel free to do so.
 # Just be sure to have the correct points at the correct position
@@ -32,6 +33,17 @@ _COMPASS_ROSE = [COMPASS_POINTS[int(round((i * len(COMPASS_POINTS)) / DESIRED_NU
 _ANGLES_DIR = {angle: _COMPASS_ROSE[i] for i, angle in enumerate(_ANGLES)}
 
 ## METHODS
+
+# You can change the location to what you need
+def set_camera_position(cam: bpy.types.Object):
+	if ISOMETRIC:
+		cam.location.y = -4.5
+		cam.location.x = -4.5
+		cam.location.z = 4.5
+	else:
+		cam.location.y = 0
+		cam.location.x = -4.5
+		cam.location.z = 4.5
 
 def get_direction(angle: int):
 	for key in _ANGLES_DIR:
@@ -50,10 +62,15 @@ def render_directional_angles(path: str):
 	selected_list = bpy.context.selected_objects
 
 	# Deselect all in scene
-	bpy.ops.object.select_all(action='TOGGLE') # TODO: Verify if 'DESELECT' isn't better
+	bpy.ops.object.select_all(action='DESELECT')
 
 	# Set render settings
 	scene = bpy.context.scene
+
+	# Get and set the camera position
+	cam = scene.camera
+	set_camera_position(cam)
+
 	scene.render.resolution_x = RENDER_RESOLUTION_X
 	scene.render.resolution_y = RENDER_RESOLUTION_Y
 

@@ -12,18 +12,15 @@ New features include:
 - **4 Directional Angles:** Lowered rendering options for simple visual representation.
 - **16 Directional Angles:** Expanded rendering options for more advanced visual representation.
 - **32 Directional Angles:** Greater flexibility for detailed and nuanced presentations.
+- **Isometric:** Moved the camera to fit the Directional Angles for iso.
 
 ## Running the script
 
 For a full explanation on how to use the scripts, head over to FoozleCC [youtube video](https://www.youtube.com/watch?v=l1Io7fLYV4o).
 
 You will need to change the properties `OUT_FOLDER_PATH` and `ACTIONS_NAMES` to fit your OS/Actions names.
-You can also optionally change `RENDER_RESOLUTION_X`, `RENDER_RESOLUTION_Y` and `RENDER_FRAME_FREQUENCY` based on your needs.
-I wouldn't recommand changing `_ANGLES` unless your requirements does not fit neither 4,8,16 and 32 angles.
-I wouldn't recommand changing `_ANGLES_DIR` unless you find better directories name for your angles.
-
-TODO: Rework the script to be a all-in-one, lazy rn
+You can also optionally change `RENDER_RESOLUTION_X`, `RENDER_RESOLUTION_Y`, `RENDER_FRAME_FREQUENCY`, `ISOMETRIC`, `DESIRED_NUM_ANGLES` and `COMPASS_POINTS` based on your needs.
 
 ## Blender version
 
-Each scripts were tested and working on MacOS Sonoma 14.0 with Blender 4.0.2
+The script was tested and working on MacOS Sonoma 14.0 with Blender 4.0.2

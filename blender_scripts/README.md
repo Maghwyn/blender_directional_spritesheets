@@ -17,6 +17,7 @@ New features include:
 ## Running the script
 
 For a full explanation on how to use the scripts, head over to FoozleCC [youtube video](https://www.youtube.com/watch?v=l1Io7fLYV4o).
+You can find his base blender template over there at the bottom [foozlecc.itch.io](https://foozlecc.itch.io/render-4-or-8-direction-sprites-from-blender)
 
 You will need to change the properties `OUT_FOLDER_PATH` and `ACTIONS_NAMES` to fit your OS/Actions names.
 You can also optionally change `RENDER_RESOLUTION_X`, `RENDER_RESOLUTION_Y`, `RENDER_FRAME_FREQUENCY`, `ISOMETRIC`, `DESIRED_NUM_ANGLES` and `COMPASS_POINTS` based on your needs.
